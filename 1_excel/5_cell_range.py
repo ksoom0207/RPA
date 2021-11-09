@@ -1,3 +1,4 @@
+from typing import Tuple
 from openpyxl.utils.cell import coordinate_from_string
 from openpyxl import Workbook
 from random import *
@@ -49,8 +50,47 @@ for row in row_ran:
         # print(xy, end=" ")
        # print(xy[0], end=" ")  # A B C A B C 이렇게 출력
         # print(xy[1], end=" ")  # 222 333 444 555 6 7 8 9 .. 이렇게 출력
-        print(xy[0:2], end=" ")  # ('A',) ('B',) ('C',)
+       # print(xy[0:1], end=" ")  # ('A',) ('B',) ('C',)
+        # print(xy[0:2], end=" ")  # ('A', 2) ('B', 2) ('C', 2)
+        # 이거 안됨 ; print(xy.index(3)) #Q. 하나만 갖고 오는 방법은?
+# 전체 rows 한줄씩
+    # print(tuple(ws.rows)) #A1 B1 C1 이렇게 시작
+# for row in tuple(ws.rows):
+#     print(row[1].value)  # 1번째 셀 영어 주르륵 나옴(세로)
 
-    print()
+# for row in ws.iter_rows():
+#     print(row[1].value) # 영어점수 갖고옴
+# # 전체 한 열씩 가져와서
+#     # print(tuple(ws.columns)) #A1 A2 이렇게 시작
+# for column in tuple(ws.columns):
+#     print(column[0].value) #번호 영어 수학 출력(가로)
 
+# for colum in ws.iter_colw(): #전체 컬럼을 갖고옴
+#     print(colum[1].value) # 영어점수 갖고옴
+
+# iter_row장점?
+# 범위를 지정해서 끊어가죠올수 있음 1번줄 부터 5번줄 까지 갖고옴
+for row in ws.iter_rows(min_row=1, max_row=5, min_col=2, max_col=3):
+    print(row[0].value, row[1].value)  # 수학점수 갖고옴 4번째 학생까지
+    print(row)
+# 출력형태
+# 번호 영어 수학
+# 1   2    3
+    # 상하상하
+
+for cols in ws.iter_cols(min_row=1, max_row=, min_col=1, max_col=3):  # col 3이상으로 하면 none나옴
+   # print(cols[0].value, cols[1].value, cols[2].value)  # 수학점수 갖고옴 4번째 학생까지
+    print(cols)
+# 출력형태
+# 번호 1 2
+# 영어 38 23
+# 수학 56 89
+# 좌우좌우
+
+# 데이터를 세로로 cols
+# 데이터를 가로로 rows
+
+
+# https://programtalk.com/python-examples/openpyxl.cell.coordinate_from_string/
 wb.save("sample.xlsx")
+# 자바스크립트 0.1 + 0.2 !== 0.3 맞음.. 부동소수점...
